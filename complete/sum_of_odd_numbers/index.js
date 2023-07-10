@@ -1,3 +1,3 @@
 function rowSumOddNumbers(n) {
-	return Math.pow(n, 3)
+  return Math.pow(n, 3);
 }
