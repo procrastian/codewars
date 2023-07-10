@@ -5,4 +5,9 @@ function validatePIN (pin) {
   return true
 }
 
-console.log(validatePIN("-1.456"))
+
+/* 
+function validatePIN(pin) {
+  return /^(\d{4}|\d{6})$/.test(pin)
+}
+*/
