@@ -1,0 +1,31 @@
+# Boolean tech test examples
+
+1 - Given an array, print elements in alternating order, first-last-etc…
+example
+
+> f([1,2,3,4])
+> 1
+> 4
+> 2
+> 3
+<!-- 
+2 - Given an array of numbers, pick the ones divisible by 2 and put them in another array; then remove the ones divisible by 3 from the original array. Then print them
+example:
+
+> f([1,4,8,9])
+> [1,4,8]
+> [4,8] -->
+
+3 - Code a function to write an object entries as a string, formatted like: “Key is: <>; value is: <>”. If a value is equal to its key, remove them from the original object and put the formatted string in an array. Then print both the object and the array
+example:
+
+> f({”aa”: 1, “bb”: "bb"})
+> {”aa”:1}
+> [”Key is: bb; value is: bb”]
+
+4 - Get the lowest and highest number in an array and print them
+Given two arrays, print true if they are mirrored, and false otherwise; e.g.: check if they have the same elements, but with inverted orders
+example
+
+> f([1,2,3], [3,2,1])
+> true
