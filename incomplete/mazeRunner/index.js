@@ -13,7 +13,7 @@ const directions = ["N", "N", "N", "N", "N", "E", "E", "E", "E", "E"];
 const key = {
   safe: 0,
   wall: 1,
-  start: 2,
+  entrance: 2,
   exit: 3,
 };
 
@@ -21,24 +21,40 @@ function mazeRunner(maze, directions) {
   findStart(maze)
 }
 
-function findStart(maze) {
-  let startCoordinates = {
+function findDoor(maze, door) {
+  let doorValue = 0
+  switch (key) {
+    case entrance:
+      doorValue = key.entrance
+      break;
+    case exit:
+      doorValue = key.exit
+    default:
+      break;
+  }
+  if (door === 'entrance') {
+    doorValue = key.entrance
+  }
+  if (door === 'exit') {
+    doorValue === key.exit
+  }
+  let coordinates = {
     x: 0,
     y: 0
   }
   for (i = 0; i < maze.length; i++) {
     let mazeLayer = maze[i]
     let foundStart = false
-    if (mazeLayer.includes(key.start)) {
+    if (mazeLayer.includes(doorValue)) {
       foundStart = true
-      startCoordinates.x = mazeLayer.indexOf(key.start)
+      coordinates.x = mazeLayer.indexOf(doorValue)
     }
     if (foundStart) {
-      startCoordinates.y = i
+      coordinates.y = i
     }
   }
-  console.log('startCoordinates', startCoordinates)
-  return startCoordinates
+  console.log('coordinates', coordinates)
+  return coordinates
 }
 
 console.log(mazeRunner(maze, directions));
