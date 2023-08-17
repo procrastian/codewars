@@ -17,19 +17,23 @@ const key = {
   exit: 3,
 };
 
+let safePath = true;
+
 function mazeRunner(maze, directions) {
   const entranceCoordinates = findDoor(maze, "entrance");
   console.log("ENTRANCE", entranceCoordinates);
   const exitCoordinates = findDoor(maze, "exit");
   console.log("EXIT", exitCoordinates);
-  findPath(entranceCoordinates, exitCoordinates, directions);
+  const result = findPath(entranceCoordinates, exitCoordinates, directions);
+  console.log("------");
+  return result;
 }
 
 function findDoor(maze, door) {
   let doorValue = 0;
   let coordinates = {
-    x: 1,
-    y: 1,
+    x: 0,
+    y: 0,
   };
   const whichDoor = door;
   switch (whichDoor) {
@@ -58,26 +62,39 @@ function findPath(enterAt, exitAt, directions) {
   const finishPos = exitAt;
   let currentPos = enterAt;
   console.log("finding path from", currentPos, "to", finishPos);
+  console.log("------");
   directions.forEach((dir) => {
     switch (dir) {
       case "N":
         currentPos.y--;
+        checkIsSafe(currentPos);
         break;
       case "S":
         currentPos.y++;
+        checkIsSafe(currentPosh);
         break;
       case "E":
         currentPos.x++;
+        checkIsSafe(currentPos);
         break;
       case "W":
         currentPos.x--;
+        checkIsSafe(currentPos);
         break;
     }
-    console.log('you are at:', currentPos)
+    console.log("you are at:", currentPos);
   });
   if (currentPos.x === finishPos.x && currentPos.y === finishPos.y) {
-    return console.log('Finish')
+    return "Finish";
   }
+  if (!safePath) return "Dead";
+  return "Lost";
 }
 
+async function checkIsSafe(currentPos) {
+  if (maze[currentPos.y][currentPos.x] === key.wall) {
+    safePath = !safePath;
+    return safePath;
+  }
+}
 console.log(mazeRunner(maze, directions));
