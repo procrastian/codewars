@@ -18,43 +18,40 @@ const key = {
 };
 
 function mazeRunner(maze, directions) {
-  findStart(maze)
+  const entranceCoordinates = findDoor(maze, "entrance");
+  console.log("ENTRANCE", entranceCoordinates);
+  const exitCoordinates = findDoor(maze, "exit");
+  console.log("EXIT", exitCoordinates);
 }
 
 function findDoor(maze, door) {
-  let doorValue = 0
-  switch (key) {
-    case entrance:
-      doorValue = key.entrance
+  let doorValue = 0;
+  let coordinates = {
+    x: 0,
+    y: 0,
+  };
+  const whichDoor = door;
+  switch (whichDoor) {
+    case "entrance":
+      doorValue = key.entrance;
       break;
-    case exit:
-      doorValue = key.exit
+    case "exit":
+      doorValue = key.exit;
     default:
       break;
   }
-  if (door === 'entrance') {
-    doorValue = key.entrance
-  }
-  if (door === 'exit') {
-    doorValue === key.exit
-  }
-  let coordinates = {
-    x: 0,
-    y: 0
-  }
   for (i = 0; i < maze.length; i++) {
-    let mazeLayer = maze[i]
-    let foundStart = false
+    let mazeLayer = maze[i];
+    let foundDoor = false;
     if (mazeLayer.includes(doorValue)) {
-      foundStart = true
-      coordinates.x = mazeLayer.indexOf(doorValue)
+      foundDoor = true;
+      coordinates.x = mazeLayer.indexOf(doorValue);
     }
-    if (foundStart) {
-      coordinates.y = i
+    if (foundDoor) {
+      coordinates.y = i;
     }
   }
-  console.log('coordinates', coordinates)
-  return coordinates
+  return coordinates;
 }
 
 console.log(mazeRunner(maze, directions));
