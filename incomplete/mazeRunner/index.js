@@ -63,8 +63,9 @@ function findPath(enterAt, exitAt, directions) {
   let currentPos = enterAt;
   console.log("finding path from", currentPos, "to", finishPos);
   console.log("------");
-  directions.forEach((dir) => {
-    switch (dir) {
+  directions.forEach((direction) => {
+    if (!safePath) return "Dead";
+    switch (direction) {
       case "N":
         currentPos.y--;
         checkIsSafe(currentPos);
@@ -84,17 +85,27 @@ function findPath(enterAt, exitAt, directions) {
     }
     console.log("you are at:", currentPos);
   });
+  if (!safePath) return "Dead";
   if (currentPos.x === finishPos.x && currentPos.y === finishPos.y) {
     return "Finish";
   }
-  if (!safePath) return "Dead";
   return "Lost";
 }
 
-async function checkIsSafe(currentPos) {
+function checkIsSafe(currentPos) {
+  if (
+    currentPos.x < 0 ||
+    currentPos.y < 0 ||
+    currentPos.x > maze.length ||
+    currentPos.y > maze.length
+  ) {
+    safePath = !safePath;
+    return safePath;
+  }
   if (maze[currentPos.y][currentPos.x] === key.wall) {
     safePath = !safePath;
     return safePath;
   }
 }
+
 console.log(mazeRunner(maze, directions));
