@@ -24,3 +24,5 @@ function sumPairs(ints, s) {
 }
 
 console.log(sumPairs([10, 5, 2, 3, 7, 5],         10));
+
+// solution requires optimising to reduce O(n)
