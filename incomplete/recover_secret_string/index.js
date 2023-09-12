@@ -1,0 +1,2 @@
+const recoverSecret = function(triplets) {
+}
