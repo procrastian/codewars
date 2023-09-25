@@ -69,7 +69,7 @@ function formatDuration(seconds) {
   return answerSentence;
 }
 
-console.log(formatDuration(558622));
+console.log(formatDuration(558601));
 
 /*
 
