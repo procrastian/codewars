@@ -1,75 +1,80 @@
-function formatDuration(seconds) {
+function formatDuration(second) {
   // check +ve int
-  if (seconds < 0) return "please provide a positive seconds value";
+  if (second < 0) return "please provide a positive second value";
   // if 0 return now
-  if (seconds === 0) return "now";
+  if (second === 0) return "now";
 
   let time = {
-    years: 0,
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    year: 0,
+    day: 0,
+    hour: 0,
+    minute: 0,
+    second: 0,
   };
 
   // check mins
-  if (seconds >= 60) {
-    time.minutes = Math.floor(seconds / 60);
+  if (second >= 60) {
+    time.minute = Math.floor(second / 60);
   }
-  // check hours
-  if (time.minutes >= 60) {
-    time.hours = Math.floor(time.minutes / 60);
+  // check hour
+  if (time.minute >= 60) {
+    time.hour = Math.floor(time.minute / 60);
   }
-  // check days
-  if (time.hours >= 24) {
-    time.days = Math.floor(time.hours / 24);
+  // check day
+  if (time.hour >= 24) {
+    time.day = Math.floor(time.hour / 24);
   }
-  // check years
-  if (time.days >= 365) {
-    time.years = Math.floor(time.days / 365);
+  // check year
+  if (time.day >= 365) {
+    time.year = Math.floor(time.day / 365);
   }
 
   // set secs
-  time.seconds = seconds % 60;
+  time.second = second % 60;
   // set mins
-  time.minutes = time.minutes % 60;
-  // set hours
-  time.hours = time.hours % 24;
-  // set days
-  time.days = time.days % 365;
+  time.minute = time.minute % 60;
+  // set hour
+  time.hour = time.hour % 24;
+  // set day
+  time.day = time.day % 365;
 
   console.log(time);
+  const seperator = ", ";
+  const finalSeperator = "and ";
+  let answerArray = [];
 
-  // construct answer using X , Y and Z
-  let answer = {
-    years: `${time.years} years`,
-    days: `${time.days} days`,
-    hours: `${time.hours} hours`,
-    mins: `${time.minutes} minutes`,
-    secs: `${time.seconds} seconds`,
-  };
-  if (time.years === 1) {
-    answer.years = "1 year";
-  }
-  if (time.days === 1) {
-    answer.days = "1 day";
-  }
-  if(time.hours === 1) {
-    answer.hours = "1 hour"
-  }
-  if (time.mins === 1) {
-    answer.mins = "1 minute"
-  }
-  if (time.seconds === 1) {
-    answer.secs = "1 second"
+  Object.keys(time).forEach((unit) => {
+    if (time[unit] === 1) {
+      answerArray.push(`1 ${unit}`);
+    }
+    if (time[unit] > 1) {
+      answerArray.push(`${time[unit]} ${unit}s`);
+    }
+  });
+
+  let answerString = "";
+  // construct answerArray using X , Y and Z
+  switch (answerArray.length) {
+    case 1:
+      answerString = answerArray[0];
+      break;
+    case 2:
+      answerString = `${answerArray[0]} and ${answerArray[1]}`;
+      break;
+    case 3:
+      answerString = `${answerArray[0]}, ${answerArray[1]} and ${answerArray[2]}`;
+      break;
+    case 4:
+      answerString = `${answerArray[0]}, ${answerArray[1]}, ${answerArray[2]} and ${answerArray[3]}`;
+      break;
+    case 5:
+      answerString = `${answerArray[0]}, ${answerArray[1]}, ${answerArray[2]}, ${answerArray[3]} and ${answerArray[4]}`;
   }
 
-
-  let answerSentence = `${answer.years}, ${answer.days}, ${answer.hours}, ${answer.mins} and ${answer.secs}`
-  return answerSentence;
+  return answerString;
 }
 
-console.log(formatDuration(558601));
+console.log(formatDuration(3660));
 
 /*
 
