@@ -10,7 +10,7 @@ The function must accept a non-negative integer. If it is zero, it just returns 
 
 It is much easier to understand with an example:
 
-* For seconds = 62, your function should return 
+* For seconds = 62, your function should return
     "1 minute and 2 seconds"
 * For seconds = 3662, your function should return
     "1 hour, 1 minute and 2 seconds"
