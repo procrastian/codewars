@@ -12,25 +12,29 @@ const keypadDigits = [
 ];
 
 function getPINs(observed) {
-
-  const allPINs = [];
-  let newPIN = []
-  allPINs.push(observed.toString());
-
+  //convert observed number to array of digits as strings
   const digits = observed.toString().split("");
-  const possibleDigits = []
 
-  digits.forEach(digit => {
-    possibleDigits.push(keypadDigits[Number(digit)])
+  // store the possibilities for each digit of the PIN
+  const possibleDigits = [];
+  digits.forEach((digit) => {
+    possibleDigits.push(keypadDigits[Number(digit)]);
   });
-  console.log(possibleDigits)
 
-  possibleDigits[0].forEach(digit => {
-    newPIN = []
-    newPIN.push(digit)
-    console.log(newPIN)
-  }) 
-  return allPINs;
+  return getCombinations(possibleDigits);
+}
+
+function getCombinations(array, previousValue) {
+  previousValue = previousValue || "";
+  if (!array.length) {
+    return previousValue;
+  }
+  let result = array[0].reduce(function (result, value) {
+    return result.concat(
+      getCombinations(array.slice(1), previousValue + value)
+    );
+  }, []);
+  return result;
 }
 
 console.log(getPINs(1357));
