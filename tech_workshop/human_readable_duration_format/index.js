@@ -1,5 +1,5 @@
 function formatDuration(seconds) {
-  if (seconds < 0) return "please provide a positive second value";
+  if (seconds < 0) return "please provide a positive seconds value";
   if (seconds === 0) return "now";
 
   let time = {
