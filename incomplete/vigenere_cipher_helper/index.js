@@ -19,18 +19,21 @@ class VigenèreCipher {
     const splitMessage = this.splitString(message);
     console.log(splitMessage, splitMessage.length);
 
-    //repeat the key to match length of split message
+    //split the key into an array of characters
     const splitKey = this.splitString(this.key);
     console.log(splitKey, splitKey.length);
-
+    
+    //create new array that is repeated n times
     function repeat(arr, n) {
       const newArr = [].concat(...Array(n).fill(arr));
       return newArr
     }
-
+    
+    //calculate n for number of repeats required
     const repeatNum = Math.ceil(splitMessage.length/splitKey.length)
     console.log(repeatNum)
-
+    
+    //repeat the key n times, and remove any extra chars to match length of split message
     const fullKey = repeat(splitKey, repeatNum);
     if (fullKey.length > splitMessage.length) {
       const elemsToDelete = fullKey.length - splitMessage.length
@@ -50,11 +53,3 @@ class VigenèreCipher {
 const c = new VigenèreCipher(key, alphabet);
 
 c.encode("a test message that has more letters");
-// c.decode('a test message')
-// c.splitABC(alphabet)
-
-// caesar - a = 0 z = 25
-// if num > 26 then -26 to give num
-
-// vig - repeat the key for all chars in message
-// count num of chars in message
