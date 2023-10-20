@@ -23,14 +23,12 @@ class VigenèreCipher {
     const splitKey = this.splitString(this.key);
     console.log(splitKey, splitKey.length);
 
-    const fullKey = splitMessage.map((char) => {
-      for (let i = 0; i < splitMessage.length; i++) {
-        if (i > splitKey.length) {
-          i = i - splitKey.length;
-        }
-        char = splitKey[i];
-      }
-    });
+    let fullKey = [];
+    for (let i = 0; i < splitMessage.length; i++) {
+      if (i < splitKey.length) fullKey.push(splitKey[i]);
+      if (i >= splitKey.length) fullKey.push(splitKey[i - splitKey.length]);
+    }
+
     console.log(fullKey, fullKey.length);
   }
 
