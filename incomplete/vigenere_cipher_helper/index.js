@@ -1,5 +1,5 @@
 const alphabet = "abcdefghijklmnopqrstuvwxyz";
-const key = "password";
+const key = "passw";
 
 class VigenèreCipher {
   constructor(key, abc) {
@@ -23,10 +23,19 @@ class VigenèreCipher {
     const splitKey = this.splitString(this.key);
     console.log(splitKey, splitKey.length);
 
-    let fullKey = [];
-    for (let i = 0; i < splitMessage.length; i++) {
-      if (i < splitKey.length) fullKey.push(splitKey[i]);
-      if (i >= splitKey.length) fullKey.push(splitKey[i - splitKey.length]);
+    function repeat(arr, n) {
+      const newArr = [].concat(...Array(n).fill(arr));
+      return newArr
+    }
+
+    const repeatNum = Math.ceil(splitMessage.length/splitKey.length)
+    console.log(repeatNum)
+
+    const fullKey = repeat(splitKey, repeatNum);
+    if (fullKey.length > splitMessage.length) {
+      const elemsToDelete = fullKey.length - splitMessage.length
+      console.log(elemsToDelete)
+      fullKey.splice(splitMessage.length - elemsToDelete, elemsToDelete)
     }
 
     console.log(fullKey, fullKey.length);
@@ -40,7 +49,7 @@ class VigenèreCipher {
 
 const c = new VigenèreCipher(key, alphabet);
 
-c.encode("a test message");
+c.encode("a test message that has more letters");
 // c.decode('a test message')
 // c.splitABC(alphabet)
 
