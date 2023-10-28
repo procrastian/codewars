@@ -3,14 +3,7 @@ function scoreHand(cards) {
   cards.forEach((card) => {
     switch (card) {
       case "A":
-        if (score <= 10) {
-          score += 11;
-        }
-        else if (score > 21 && cards.includes("A")) {
-          score -= 10;
-        } else {
-          score += 1;
-        }
+        score += 11;
         break;
       case "J":
         score += 10;
@@ -52,9 +45,13 @@ function scoreHand(cards) {
         break;
     }
   });
-if (score > 21) {
-  
-}
+
+  cards.forEach((element) => {
+    if (score > 21 && element === "A") {
+      score -= 10;
+    }
+  });
+
   return score;
 }
 
